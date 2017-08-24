@@ -3,18 +3,20 @@
         <div class="col s12 l4" v-for="(task, index) in tasks">
             <div class="card deep-orange darken-2">
                 <div class="card-content white-text">
-                    <span class="card-title">{{task.text}}</span>
+                    <span class="card-title"><b>{{task.text}}</b></span>
                     <p>
-                        Data: {{task.date}}
-                        <br>
-                        <div class="chip" v-for="(tag, indexTag) in task.tags">
-                            {{tag.text}}
-                            <!--<i class="material-icons">close</i>-->
-                        </div>
+                        <p v-if="task.date">{{task.date}}</p>
+                        <p class="item-descricao" v-if="task.descricao">{{task.descricao}}</p>
+                        <p v-if="task.tags.lenght > 0">
+                            <div class="chip" v-for="(tag, indexTag) in task.tags">
+                                {{tag.text}}
+                                <!--<i class="material-icons">close</i>-->
+                            </div>
+                        </p>
                     </p>
                 </div>
                 <div class="card-action">
-                    <a v-on:click="$emit('remove', index)">Remover</a>
+                    <a class="remover" v-on:click="$emit('remove', index)">Remover</a>
                 </div>              
             </div>
         </div>
@@ -33,3 +35,13 @@
         },
     }
 </script>
+
+<style>
+    .item-descricao {
+        text-align: justify;
+    }
+
+    .remover {
+        cursor: pointer;
+    }
+</style>

@@ -10,9 +10,11 @@
 				:text="text" 
 				:text_tags="text_tags"
 				:date="date"
+				:descricao="descricao"
 				:tags="tags"
 				@addTask="addTask"
 				@addTags="addTags"
+				@removeTag="removeTag"
 			/>
 		</div>		
 		<div class="row" v-show="false">
@@ -50,6 +52,7 @@
 				title: 'To-do in Vue',
 				text: '',
 				date: '',
+				descricao: '',
 				text_tags: '',
 				tasks: JSON.parse(localStorage.getItem('tasks') || '[]'),
 				tags: []
@@ -67,9 +70,15 @@
 		methods : {			
 			addTask() {
 				if (this.text != '') {
-					this.tasks.push({text : this.text, tags : this.tags, date : this.date});
+					this.tasks.push({
+						text : this.text,
+						tags : this.tags,
+						date : this.date,
+						descricao : this.descricao
+					});
 					this.text = '';
 					this.date = '';
+					this.descricao = '';
 					this.tags = [];
 					localStorage.setItem('tasks', JSON.stringify(this.tasks));
 				}
@@ -83,7 +92,10 @@
 					this.tags.push({text : this.text_tags});
 					this.text_tags = '';
 				}
-			}		
+			},
+			removeTag(index) {
+				this.tags.splice(index, 1);
+			}
 		}
 	}
 </script>

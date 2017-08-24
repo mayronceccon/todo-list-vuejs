@@ -1,14 +1,19 @@
 <template>
     <div class="col s12 offset-m2 m8">
-        <div class="input-field col s12">
+        <div class="input-field col s12 l6">
             <i class="material-icons prefix">access_time</i>
             <input name="task" type="text" class="validate" v-model="text_computed">
             <label for="task">Tarefa</label>
         </div>
-        <div class="input-field col s12">
+        <div class="input-field col s12 l6">
             <i class="material-icons prefix">date_range</i>							
             <input name="date" type="text" class="datepicker" v-model="date_computed" v-mask="'##/##/#### ##:##'">
             <label for="date">Data</label>
+        </div>
+        <div class="input-field col s12">
+            <i class="material-icons prefix">assignment</i>
+            <textarea name="task" class="materialize-textarea" v-model="descricao_computed"></textarea>
+            <label for="descricao">Descrição</label>
         </div>
         <div class="input-field col s12">
             <i class="material-icons prefix">turned_in</i>
@@ -18,9 +23,9 @@
             <div class="col s12" v-show="tags.length > 0">
                 <div class="card grey lighten-1">
                     <div id="card-tags" class="card-content white-text">
-                        <div class="chip" v-for="tag in tags">
+                        <div class="chip" v-for="(tag, index) in tags">
                             {{tag.text}}
-                            <i class="tiny material-icons">close</i>
+                            <i class="tiny material-icons" @click="$emit('removeTag', index)">close</i>
                         </div>
                     </div>
                 </div>
@@ -40,6 +45,7 @@
         props : {            
             text: String,
             text_tags: String,
+            descricao: String,
             date: String,
             tags: Array
         },       
@@ -66,6 +72,14 @@
                 },
                 set : function(text) {
                     this.$parent.$data.date = text;
+                }                
+            },
+            descricao_computed : {
+                get: function() {
+                    return this.descricao;
+                },
+                set : function(text) {
+                    this.$parent.$data.descricao = text;
                 }                
             }
         }
