@@ -1,5 +1,5 @@
 <template>
-    <div class="center-align">   
+    <div class="col s12 center-align">
         <span>Meu IP: <b>{{meuip}}</b></span>
     </div>
 </template>
