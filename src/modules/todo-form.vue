@@ -15,12 +15,18 @@
             <input name="text_tags" type="text" class="validate" v-model="text_tags_computed" 
             v-on:keyup.enter="$emit('addTags')">
             <label for="text_tags">Tags</label>
-            <div class="chip" v-for="tag in tags">
-                {{tag.text}}
-                <!--<i class="close material-icons">close</i>-->
+            <div class="col s12" v-show="tags.length > 0">
+                <div class="card grey lighten-1">
+                    <div id="card-tags" class="card-content white-text">
+                        <div class="chip" v-for="tag in tags">
+                            {{tag.text}}
+                            <i class="tiny material-icons">close</i>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <a class="waves-effect waves-light btn col s12 deep-orange darken-2" @click="$emit('addTask')">Inserir</a>						
+        <a id="btn-inserir" class="waves-effect waves-light btn btn-large col s12 deep-orange darken-2" @click="$emit('addTask')">Inserir</a>						
     </div>
 </template>
 
@@ -78,5 +84,14 @@
 
     .input-field .active {
         color: #E64A19 !important;
+    }
+
+    #btn-inserir {
+        margin-top: 5px;
+    }
+
+    #card-tags .chip i {
+        vertical-align: middle;
+        cursor: pointer;
     }
 </style>

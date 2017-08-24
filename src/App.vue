@@ -15,7 +15,7 @@
 				@addTags="addTags"
 			/>
 		</div>		
-		<div class="row">
+		<div class="row" v-show="false">
 			<div class="col s12">
 				<TodoList v-bind:tasks="tasks" @remove="removeTask"></TodoList>			
 			</div>
@@ -51,7 +51,7 @@
 				text: '',
 				date: '',
 				text_tags: '',
-				tasks: [],
+				tasks: JSON.parse(localStorage.getItem('tasks') || '[]'),
 				tags: []
 			}
 		},
@@ -71,10 +71,12 @@
 					this.text = '';
 					this.date = '';
 					this.tags = [];
+					localStorage.setItem('tasks', JSON.stringify(this.tasks));
 				}
 			},
 			removeTask(index) {
 				this.tasks.splice(index, 1);
+				localStorage.setItem('tasks', JSON.stringify(this.tasks));
 			},
 			addTags() {
 				if (this.text_tags != '') {
