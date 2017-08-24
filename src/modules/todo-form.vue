@@ -20,7 +20,7 @@
                 <!--<i class="close material-icons">close</i>-->
             </div>
         </div>
-        <a class="waves-effect waves-light btn col s12" @click="$emit('addTask')">Inserir</a>						
+        <a class="waves-effect waves-light btn col s12 deep-orange darken-2" @click="$emit('addTask')">Inserir</a>						
     </div>
 </template>
 
@@ -67,5 +67,16 @@
 </script>
 
 <style>
+    .input-field input:focus + label {
+        color: #E64A19 !important;
+    }
     
+    .row .input-field input:focus {
+        border-bottom: 1px solid #E64A19 !important;
+        box-shadow: 0 1px 0 0 #E64A19 !important
+    }
+
+    .input-field .active {
+        color: #E64A19 !important;
+    }
 </style>

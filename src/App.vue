@@ -3,7 +3,7 @@
 	  	<div class="row">
 			<TodoNavbar
 				:title="title" 
-			/>
+			/>			
 		</div>
 		<div class="row">
 			<TodoForm				
@@ -17,11 +17,16 @@
 		</div>		
 		<div class="row">
 			<div class="col s12">
-				<TodoList v-bind:tasks="tasks" @remove="removeTask"></TodoList>
-				<div class="center-align">
-					<div class="chip">
-						Tarefas a fazer: {{tasks.length}}
-					</div>
+				<TodoList v-bind:tasks="tasks" @remove="removeTask"></TodoList>			
+			</div>
+		</div>
+		<div class="row">
+			<TodoCards v-bind:tasks="tasks" @remove="removeTask"/>
+		</div>
+		<div class="row">
+			<div class="col s12 center-align">
+				<div class="chip">
+					Tarefas a fazer: {{tasks.length}}
 				</div>
 			</div>
 		</div>
@@ -36,12 +41,13 @@
 	import TodoList from './modules/todo-list.vue';
 	import TodoForm from './modules/todo-form.vue';
 	import TodoNavbar from './modules/todo-navbar.vue';
+	import TodoCards from './modules/todo-cards.vue';
 
 	export default {
 		name: 'app',
 		data () {
 			return {
-				title: 'To-do List Vue Js',
+				title: 'To-do in Vue',
 				text: '',
 				date: '',
 				text_tags: '',
@@ -51,7 +57,13 @@
 		},
 		mounted : function() {
 		},
-		components : {TodoMeuIp, TodoList, TodoForm, TodoNavbar},
+		components : {
+			TodoMeuIp,
+			TodoList,
+			TodoForm,
+			TodoNavbar,
+			TodoCards,
+		},
 		methods : {			
 			addTask() {
 				if (this.text != '') {
