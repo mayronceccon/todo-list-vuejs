@@ -45,6 +45,7 @@
 
 <script>
 	import _ from 'lodash'
+	import LocalStorage from './helpers/local-storage.js'
 	import TodoMeuIp from './modules/todo-meuip.vue';
 	import TodoList from './modules/todo-list.vue';
 	import TodoForm from './modules/todo-form.vue';
@@ -52,8 +53,20 @@
 	import TodoCards from './modules/todo-cards.vue';
 	import TodoPesquisa from './modules/todo-pesquisa.vue';
 
+	var mixin = {
+		methods: {
+			foo: function () {
+				console.log('foo')
+			},
+			conflicting: function () {
+				console.log('no mixin')
+			}
+		}
+	}
+
 	export default {
 		name: 'app',
+		mixins: [mixin],
 		data () {
 			return {
 				title: 'To-do in Vue',
@@ -64,7 +77,8 @@
 				tasks: [],
 				tags: [],
 				filter: '',
-				order : 'date'
+				order : 'date',
+				name : 'PESSOA'
 			}
 		},
 		mounted : function() {
@@ -90,7 +104,7 @@
 		},
 		watch: {
 			filter : function () {
-				console.log(this.filter)
+				//console.log(this.getName())
 				if (this.filter != '') {
 					let self = this;
 					let result = _.filter(this.listTasks(), function(d) {
@@ -105,6 +119,9 @@
 		},
 		methods : {
 			listTasks() {
+
+				//console.log(this.foo());
+
 				let result = JSON.parse(localStorage.getItem('tasks') || '[]');
 				result = _.orderBy(result, this.order);
 				return result;

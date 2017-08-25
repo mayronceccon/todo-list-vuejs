@@ -11,7 +11,7 @@
 <script>
     export default {
         props : {
-            filter_ String,
+            filter : String,
         },
         computed : {
             filter_computed : {
