@@ -19,11 +19,16 @@
 		</div>		
 		<div class="row" v-show="false">
 			<div class="col s12">
-				<TodoList v-bind:tasks="tasks" @remove="removeTask"></TodoList>			
+				<TodoList v-bind:tasks="list" @remove="removeTask"></TodoList>			
 			</div>
 		</div>
 		<div class="row">
-			<TodoCards v-bind:tasks="tasks" @remove="removeTask"/>
+			<TodoPesquisa 
+				:filter="filter"
+			/>
+		</div>
+		<div class="row">
+			<TodoCards v-bind:tasks="list" @remove="removeTask"/>
 		</div>
 		<div class="row">
 			<div class="col s12 center-align">
@@ -39,11 +44,13 @@
 </template>
 
 <script>
+	import _ from 'lodash'
 	import TodoMeuIp from './modules/todo-meuip.vue';
 	import TodoList from './modules/todo-list.vue';
 	import TodoForm from './modules/todo-form.vue';
 	import TodoNavbar from './modules/todo-navbar.vue';
 	import TodoCards from './modules/todo-cards.vue';
+	import TodoPesquisa from './modules/todo-pesquisa.vue';
 
 	export default {
 		name: 'app',
@@ -54,11 +61,14 @@
 				date: '',
 				descricao: '',
 				text_tags: '',
-				tasks: JSON.parse(localStorage.getItem('tasks') || '[]'),
-				tags: []
+				tasks: [],
+				tags: [],
+				filter: '',
+				order : 'date'
 			}
 		},
 		mounted : function() {
+			this.tasks = this.listTasks();
 		},
 		components : {
 			TodoMeuIp,
@@ -66,8 +76,39 @@
 			TodoForm,
 			TodoNavbar,
 			TodoCards,
+			TodoPesquisa,
 		},
-		methods : {			
+		computed : {
+			list : {
+				get: function() {
+					return this.tasks;
+                },
+                set : function(data) {
+                    this.tasks = data;
+                }   
+			},
+		},
+		watch: {
+			filter : function () {
+				console.log(this.filter)
+				if (this.filter != '') {
+					let self = this;
+					let result = _.filter(this.listTasks(), function(d) {
+						return d['text'].startsWith(self.filter); 
+					});
+					result = _.orderBy(result, this.order);
+					this.list = result;
+				} else {
+					this.list = this.listTasks();
+				}
+			}
+		},
+		methods : {
+			listTasks() {
+				let result = JSON.parse(localStorage.getItem('tasks') || '[]');
+				result = _.orderBy(result, this.order);
+				return result;
+			},	
 			addTask() {
 				if (this.text != '') {
 					this.tasks.push({
