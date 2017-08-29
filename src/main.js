@@ -1,11 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
-import VueResource from 'vue-resource'
-import VueMask from 'v-mask'
-import { VueMaskDirective } from 'v-mask'
+import plugins from './plugins'
 
-Vue.directive('mask', VueMaskDirective);
-Vue.use(VueResource, VueMask);
+Vue.use(plugins)
 
 new Vue({
 	el: '#app',
