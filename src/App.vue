@@ -1,20 +1,11 @@
 <template>
   	<div id="app" v-cloak class="container">
 	  	<div class="row">
-			<TodoNavbar
-				:title="title" 
-			/>			
+			<TodoNavbar />
 		</div>
 		<div class="row">
-			<TodoForm				
-				:text="text" 
-				:text_tags="text_tags"
-				:date="date"
-				:descricao="descricao"
-				:tags="tags"
-				@addTask="addTask"
-				@addTags="addTags"
-				@removeTag="removeTag"
+			<TodoForm 
+				@save="addTodo"
 			/>
 		</div>
 		<div class="row">
@@ -23,7 +14,10 @@
 			/>
 		</div>
 		<div class="row">
-			<TodoCards v-bind:tasks="list" @remove="removeTask"/>
+			<TodoCards 
+				:tasks="list"
+				@remove="removeTodo"
+			/>
 		</div>
 		<div class="row">
 			<div class="col s12 center-align">
@@ -49,13 +43,7 @@
 		name: 'app',
 		data () {
 			return {
-				title: 'To-do in Vue',
-				text: '',
-				date: '',
-				descricao: '',
-				text_tags: '',
 				tasks: [],
-				tags: [],
 				filter: '',
 				order : 'date',
 			}
@@ -99,34 +87,14 @@
 				let result = JSON.parse(localStorage.getItem('tasks') || '[]');
 				result = _.orderBy(result, this.order);
 				return result;
-			},	
-			addTask() {
-				if (this.text != '') {
-					this.tasks.push({
-						text : this.text,
-						tags : this.tags,
-						date : this.date,
-						descricao : this.descricao
-					});
-					this.text = '';
-					this.date = '';
-					this.descricao = '';
-					this.tags = [];
-					localStorage.setItem('tasks', JSON.stringify(this.tasks));
-				}
 			},
-			removeTask(index) {
-				this.tasks.splice(index, 1);
+			addTodo(data) {
+				this.tasks.push(data);
 				localStorage.setItem('tasks', JSON.stringify(this.tasks));
 			},
-			addTags() {
-				if (this.text_tags != '') {
-					this.tags.push({text : this.text_tags});
-					this.text_tags = '';
-				}
-			},
-			removeTag(index) {
-				this.tags.splice(index, 1);
+			removeTodo(index) {
+				this.tasks.splice(index, 1);
+				localStorage.setItem('tasks', JSON.stringify(this.tasks));
 			}
 		}
 	}

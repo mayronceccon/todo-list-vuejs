@@ -16,7 +16,7 @@
                     </p>
                 </div>
                 <div class="card-action">
-                    <a class="remover" v-on:click="$emit('remove', index)">Remover</a>
+                    <a class="remover" v-on:click="removeTask(index)">Remover</a>
                 </div>              
             </div>
         </div>
@@ -33,6 +33,11 @@
         props : {
             tasks : Array
         },
+        methods : {
+            removeTask(index) {				
+                this.$emit('remove', index)
+			},
+        }
     }
 </script>
 

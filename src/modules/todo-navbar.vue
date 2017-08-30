@@ -15,11 +15,8 @@
     export default {
         data () {
             return {
-               
+               title: 'To-do in Vue',
             }
-        },
-        props : {
-            title: String,
         },
         computed : {
             time : function() {
