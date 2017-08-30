@@ -5,6 +5,6 @@ import plugins from './plugins'
 Vue.use(plugins)
 
 new Vue({
-	el: '#app',
-	render: h => h(App)
+  el: '#app',
+  render: h => h(App)
 })
