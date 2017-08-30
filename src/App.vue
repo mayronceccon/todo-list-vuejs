@@ -39,6 +39,8 @@
 	import TodoNavbar from './modules/todo-navbar.vue';
 	import TodoCards from './modules/todo-cards.vue';
 	import TodoPesquisa from './modules/todo-pesquisa.vue';
+	import storage from './helpers/storage';
+
 	export default {
 		name: 'app',
 		data () {
@@ -48,6 +50,7 @@
 				order : 'date',
 			}
 		},
+		mixins: [storage],
 		mounted : function() {
 			this.tasks = this.listTasks();
 		},
@@ -65,36 +68,24 @@
                 },
                 set : function(data) {
                     this.tasks = data;
-                }   
+                }
 			},
 		},
 		watch: {
 			filter : function () {
-				if (this.filter != '') {
-					let self = this;
-					let result = _.filter(this.listTasks(), function(d) {
-						return d['text'].startsWith(self.filter); 
-					});
-					result = _.orderBy(result, this.order);
-					this.list = result;
-				} else {
-					this.list = this.listTasks();
-				}
+				this.list = this.filterDataTodo(this.filter)
 			}
 		},
 		methods : {
 			listTasks() {
-				let result = JSON.parse(localStorage.getItem('tasks') || '[]');
-				result = _.orderBy(result, this.order);
-				return result;
+				return this.listDataTodo()
 			},
 			addTodo(data) {
 				this.tasks.push(data);
-				localStorage.setItem('tasks', JSON.stringify(this.tasks));
+				this.saveDataTodo(this.tasks)
 			},
 			removeTodo(index) {
-				this.tasks.splice(index, 1);
-				localStorage.setItem('tasks', JSON.stringify(this.tasks));
+				this.removeDataTodo(this.tasks, index);
 			}
 		}
 	}
