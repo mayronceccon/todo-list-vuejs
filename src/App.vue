@@ -10,7 +10,7 @@
 		</div>
 		<div class="row">
 			<TodoPesquisa 
-				:filter="filter"
+				@filter="filterData"
 			/>
 		</div>
 		<div class="row">
@@ -71,11 +71,6 @@
                 }
 			},
 		},
-		watch: {
-			filter : function () {
-				this.list = this.filterDataTodo(this.filter)
-			}
-		},
 		methods : {
 			listTasks() {
 				return this.listDataTodo()
@@ -85,7 +80,10 @@
 				this.saveDataTodo(this.tasks)
 			},
 			removeTodo(index) {
-				this.removeDataTodo(this.tasks, index);
+				this.removeDataTodo(this.tasks, index)
+			},
+			filterData(filter) {
+				this.list = this.filterDataTodo(filter)
 			}
 		}
 	}
