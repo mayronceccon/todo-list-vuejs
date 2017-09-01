@@ -10,15 +10,15 @@
 
 <script>
     export default {
-        data () {
+        data() {
             return {
-                filter : ''
-            }
-        },      
+                filter: "",
+            };
+        },
         watch: {
-			filter : function () {
-                this.$emit('filter', this.filter)
-			}
-		},
+            filter: function() {
+                this.$emit("filter", this.filter);
+            },
+        },
     };
 </script>

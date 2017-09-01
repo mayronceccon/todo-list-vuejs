@@ -37,42 +37,42 @@
 
 <script>
     export default {
-        data () {
+        data() {
             return {
-                text_tags: '',
-				todoData : 	{
-					text : '',
-					date : '',
-					descricao : '',
-					tags : [],
-				}
-            }
+                text_tags: "",
+                todoData: {
+                    text: "",
+                    date: "",
+                    descricao: "",
+                    tags: [],
+                },
+            };
         },
-        methods : {
+        methods: {
             addTask() {
-				if (this.todoData.text != '') {
+                if (this.todoData.text != "") {
                     let data = this.todoData;
-					this.$emit('save', data);
-                    //this.clearTodoData();
-				}
-			},
+                    this.$emit("save", data);
+                    // this.clearTodoData();
+                }
+            },
             addTags() {
-				if (this.text_tags != '') {
-					this.todoData.tags.push({text : this.text_tags});
-					this.text_tags = '';
-				}
-			},
-			removeTag(index) {
-				this.todoData.tags.splice(index, 1);
-			},
+                if (this.text_tags != "") {
+                    this.todoData.tags.push({text: this.text_tags});
+                    this.text_tags = "";
+                }
+            },
+            removeTag(index) {
+                this.todoData.tags.splice(index, 1);
+            },
             clearTodoData() {
-                this.text_tags = ''
-                this.todoData.text = ''
-                this.todoData.date = ''
-                this.todoData.descricao = ''
-                this.todoData.tags = []
-            }
-        }
+                this.text_tags = "";
+                this.todoData.text = "";
+                this.todoData.date = "";
+                this.todoData.descricao = "";
+                this.todoData.tags = [];
+            },
+        },
     };
 </script>
 

@@ -14,4 +14,5 @@ npm install v-mask --save
 # serve with hot reload at localhost:8080
 npm run dev
 
+npm install --save-dev eslint-config-google eslint-plugin-html babel-eslint
 ```

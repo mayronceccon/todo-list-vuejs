@@ -1,10 +1,10 @@
-import Vue from 'vue'
-import App from './App.vue'
-import plugins from './plugins'
+import Vue from "vue";
+import App from "./App.vue";
+import plugins from "./plugins";
 
-Vue.use(plugins)
+Vue.use(plugins);
 
 new Vue({
-  el: '#app',
-  render: h => h(App)
-})
+    el: "#app",
+    render: (h) => h(App),
+});

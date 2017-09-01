@@ -36,6 +36,12 @@ module.exports = {
           name: '[name].[ext]?[hash]'
         }
       }
+    ],
+    loaders: [
+      {
+        test: /\.vue$/,
+        loader: 'vue!eslint'
+      }
     ]
   },
   resolve: {

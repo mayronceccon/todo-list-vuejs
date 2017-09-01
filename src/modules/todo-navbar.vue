@@ -13,16 +13,16 @@
 
 <script>
     export default {
-        data () {
+        data() {
             return {
-               title: 'To-do in Vue',
-            }
+                title: "To-do in Vue",
+            };
         },
-        computed : {
-            time : function() {
-                return moment().format('DD/MM/YYYY, HH:mm:ss');
-            }
-        }
+        computed: {
+            time: function() {
+                return moment().format("DD/MM/YYYY, HH:mm:ss");
+            },
+        },
     };
 </script>
 

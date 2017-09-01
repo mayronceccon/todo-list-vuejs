@@ -25,20 +25,20 @@
 
 <script>
     export default {
-        data () {
+        data() {
             return {
-                
-            }
+
+            };
         },
-        props : {
-            tasks : Array
+        props: {
+            tasks: Array,
         },
-        methods : {
-            removeTask(index) {				
-                this.$emit('remove', index)
-			},
-        }
-    }
+        methods: {
+            removeTask(index) {
+                this.$emit("remove", index);
+            },
+        },
+    };
 </script>
 
 <style>

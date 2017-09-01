@@ -6,25 +6,23 @@
 
 <script>
     export default {
-        data () {
+        data() {
             return {
-                meuip : '',
-            }
+                meuip: "",
+            };
         },
-        mounted : function() {
+        mounted: function() {
             this.buscaIp();
         },
-        methods : {
+        methods: {
             buscaIp() {
-				this.$http.get('http://httpbin.org/ip').then(response => { 
-					//this.origin = response.body;
-					let data = response.body;
-					this.meuip = data.origin;
-					//this.$set('meuip_desc', data.origin);
-				}, response => {
-					// error callback 
-				});
-			}
-        }
-	}
+                this.$http.get("http://httpbin.org/ip").then((response) => {
+                    let data = response.body;
+                    this.meuip = data.origin;
+                }, (response) => {
+                    console.log(response);
+                });
+            },
+        },
+    };
 </script>
