@@ -19,8 +19,6 @@
                 this.$http.get("http://httpbin.org/ip").then((response) => {
                     let data = response.body;
                     this.meuip = data.origin;
-                }, (response) => {
-                    console.log(response);
                 });
             },
         },

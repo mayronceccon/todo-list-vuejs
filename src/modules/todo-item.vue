@@ -12,9 +12,6 @@
         props: {
             item: Object,
         },
-        beforeDestroy: function() {
-            console.log("beforeDestroy");
-        },
     };
 </script>
 

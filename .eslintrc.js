@@ -1,5 +1,7 @@
 module.exports = {
     "env": {
+        "browser": true,
+        "node": true     
     },
     "extends": "eslint:recommended",
     "parserOptions": {
@@ -23,7 +25,9 @@ module.exports = {
         "semi": [
             "error",
             "always"
-        ]
+        ],
+        "eqeqeq": 0,
+        "strict": 0
     },
     "plugins": [
         "html"
